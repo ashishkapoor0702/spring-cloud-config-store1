@@ -1,0 +1,32 @@
+server:
+  port: 8091
+  servlet:
+    context-path: /api/performance-alert-service/v1
+
+spring:
+  datasource:
+    url: jdbc:mysql://gssprintosdaily.ccqkizlpkrzs.us-west-2.rds.amazonaws.com:3306/ppcservice?useSSL=false
+    username: dbservacct
+    password: DPN_IN000_18
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    hikari:
+      connection-timeout: 60000
+      maximum-pool-size: 5
+  security:
+    user:
+      name: admin
+      password: admin
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url.defaultZone: http://${spring.security.user.name}:${spring.security.user.password}@localhost:9002/eureka/
+  instance:
+    hostname: localhost
